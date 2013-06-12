@@ -146,11 +146,14 @@ FILTER {
       $defs = decode_json($settings);
     }
     if ($defs && ref $defs eq 'HASH') {
-      if ($defs->{show}) { 
+      if (exists $defs->{show}) { 
         $opts{show} = $defs->{show}; 
       }
-      if ($defs->{output}) {
+      if (exists $defs->{output}) {
         $opts{output} = $defs->{output};
+      }
+      if (exists $defs->{format}) {
+        $opts{format} = $defs->{format};
       }
     }
   }
@@ -183,6 +186,9 @@ FILTER {
       }
       if (exists $show->{trace}) {
         $trace = $show->{trace};
+      }
+      if (exists $show->{format}) {
+        $fmt = $show->{format};
       }
     }
     else {
